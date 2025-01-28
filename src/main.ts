@@ -35,17 +35,39 @@ class Human extends ex.Actor {
     super.onInitialize(engine);
     this.graphics.use(spriteSheet.getSprite(4, 0));
   }
+
+  moveTo(pos: ex.Vector): void {
+    this.actions.moveTo({
+      duration: 200,
+      pos: pos,
+    });
+  }
 }
 
 class GameScene extends ex.Scene {
-  #player!: Human;
+  private player!: Human;
+
+  constructor() {
+    super();
+    this.mouseDownHandler = this.mouseDownHandler.bind(this);
+  }
 
   override onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
-    this.#player = new Human({
+
+    this.player = new Human({
       pos: ex.vec(100, 100),
     });
-    this.add(this.#player);
+    this.add(this.player);
+  }
+
+  override onActivate(context: ex.SceneActivationContext<unknown>): void {
+    super.onActivate(context);
+    this.input.pointers.on("down", this.mouseDownHandler);
+  }
+
+  private mouseDownHandler(event: ex.PointerEvent): void {
+    this.player.moveTo(event.worldPos);
   }
 }
 
