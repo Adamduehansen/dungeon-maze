@@ -10,6 +10,7 @@ export abstract class Unit extends ex.Actor {
   constructor(args: Args) {
     super({
       pos: args.cell.pos,
+      anchor: ex.Vector.Zero,
     });
   }
 

@@ -17,7 +17,7 @@ export class GameScene extends ex.Scene {
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
 
-    const board = new Board();
+    const board = new Board(4, 4);
     for (const cell of board.cells) {
       this.add(cell);
     }
@@ -25,8 +25,12 @@ export class GameScene extends ex.Scene {
     const mainPlayer = new MainPlayer({
       heroSpawnCell: board.cells[0],
       engine: this.engine,
+      board: board,
     });
     this.add(mainPlayer.hero);
+
+    this.camera.addStrategy(new ex.LockCameraToActorStrategy(mainPlayer.hero));
+    this.camera.zoom = 3;
 
     this.#players.push(mainPlayer);
   }
