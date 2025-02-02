@@ -17,13 +17,15 @@ export class GameScene extends ex.Scene {
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
 
-    const board = new Board(4, 4);
-    for (const cell of board.cells) {
-      this.add(cell);
+    const board = new Board();
+    for (const tile of board.tiles) {
+      for (const cell of tile.cells) {
+        this.add(cell);
+      }
     }
 
     const mainPlayer = new MainPlayer({
-      heroSpawnCell: board.cells[0],
+      heroSpawnCell: board.tiles[0].cells[0],
       engine: this.engine,
       board: board,
     });

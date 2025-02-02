@@ -1,18 +1,15 @@
 import * as ex from "excalibur";
-import { Board } from "../board";
 
 interface Args {
   x: number;
   y: number;
-  board: Board;
 }
 
 export class Cell extends ex.Actor {
-  #actor?: ex.Actor;
   readonly x: number;
   readonly y: number;
 
-  constructor({ x, y, board }: Args) {
+  constructor({ x, y }: Args) {
     super({
       pos: ex.vec(x * 8, y * 8),
       name: `Cell [${x}, ${y}]`,
@@ -24,9 +21,5 @@ export class Cell extends ex.Actor {
 
     this.x = x;
     this.y = y;
-  }
-
-  addActor(actor: ex.Actor): void {
-    this.#actor = actor;
   }
 }

@@ -1,32 +1,27 @@
 import * as ex from "excalibur";
 import { Cell } from "./actors/cell";
+import { Tile } from "./tile";
 
 export class Board {
-  cells: Cell[] = [];
-  rows: number;
-  columns: number;
+  tiles: Tile[] = [];
 
-  constructor(rows: number, columns: number) {
-    this.rows = rows;
-    this.columns = columns;
-
-    for (let index = 0; index < this.rows * this.columns; index++) {
-      const cell = new Cell({
-        x: index % this.columns,
-        y: Math.floor(index / this.columns),
-        board: this,
-      });
-      this.cells.push(cell);
-    }
+  constructor() {
+    const startTile = new Tile(4, 8);
+    this.tiles.push(startTile);
   }
 
   getCell(x: number, y: number): Cell | null {
-    return this.cells.find((cell) => cell.x === x && cell.y === y) ?? null;
+    return this.tiles
+      .map((tile) => tile.cells)
+      .flat()
+      .find((cell) => cell.x === x && cell.y === y) ?? null;
   }
 
   getCellByPos(pos: ex.Vector): Cell | null {
     const x = Math.floor(pos.x / 8);
     const y = Math.floor(pos.y / 8);
+    console.log(x, y);
+
     return this.getCell(x, y);
   }
 }
