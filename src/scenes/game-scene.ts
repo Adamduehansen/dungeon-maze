@@ -1,6 +1,6 @@
 import * as ex from "excalibur";
 import { Human } from "../actors/human";
-import { Tile } from "../actors/tile";
+import { Cell } from "../actors/cell";
 
 export class GameScene extends ex.Scene {
   #player!: Human;
@@ -18,10 +18,10 @@ export class GameScene extends ex.Scene {
     });
     this.add(this.#player);
 
-    const tile = new Tile({
+    const cell = new Cell({
       pos: ex.vec(150, 150),
     });
-    this.add(tile);
+    this.add(cell);
 
     // Camera
     this.camera.zoom = 2;
