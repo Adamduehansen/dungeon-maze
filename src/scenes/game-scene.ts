@@ -1,7 +1,7 @@
 import * as ex from "excalibur";
 import { Cell } from "../actors/cell";
 import { Player } from "../player";
-import { HumanPlayer } from "../human-player";
+import { MainPlayer } from "../main-player";
 
 export class GameScene extends ex.Scene {
   #players: Player[] = [];
@@ -23,15 +23,16 @@ export class GameScene extends ex.Scene {
     this.add(cell1);
 
     const cell2 = new Cell({
-      pos: ex.vec(150, 100),
+      pos: ex.vec(150, 150),
     });
     this.add(cell2);
 
-    const humanPlayer = new HumanPlayer({
+    const mainPlayer = new MainPlayer({
       heroSpawnCell: cell1,
+      engine: this.engine,
     });
-    this.add(humanPlayer.hero);
+    this.add(mainPlayer.hero);
 
-    this.#players = [humanPlayer];
+    this.#players.push(mainPlayer);
   }
 }
