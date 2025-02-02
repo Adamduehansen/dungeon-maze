@@ -1,9 +1,10 @@
 import * as ex from "excalibur";
-import { Hero } from "../actors/hero";
 import { Cell } from "../actors/cell";
+import { Player } from "../player";
+import { HumanPlayer } from "../human-player";
 
 export class GameScene extends ex.Scene {
-  #player!: Hero;
+  #players: Player[] = [];
 
   constructor() {
     super();
@@ -12,11 +13,6 @@ export class GameScene extends ex.Scene {
   override onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
 
-    this.#player = new Hero({
-      pos: ex.vec(100, 100),
-    });
-    this.add(this.#player);
-
     const cell = new Cell({
       pos: ex.vec(150, 150),
     });
@@ -24,15 +20,18 @@ export class GameScene extends ex.Scene {
 
     // Camera
     this.camera.zoom = 2;
-    this.camera.pos = this.#player.pos;
   }
 
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
-    this.input.pointers.on("down", this.mouseDownHandler.bind(this));
-  }
 
-  private mouseDownHandler(event: ex.PointerEvent): void {
-    console.log(event);
+    const humanPlayer = new HumanPlayer({
+      heroSpawnPos: ex.vec(100, 100),
+    });
+    this.add(humanPlayer.hero);
+
+    this.camera.pos = humanPlayer.hero.pos;
+
+    this.#players = [humanPlayer];
   }
 }
