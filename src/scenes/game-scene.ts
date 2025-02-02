@@ -1,19 +1,18 @@
 import * as ex from "excalibur";
-import { Human } from "../actors/human";
+import { Hero } from "../actors/hero";
 import { Cell } from "../actors/cell";
 
 export class GameScene extends ex.Scene {
-  #player!: Human;
+  #player!: Hero;
 
   constructor() {
     super();
-    this.mouseDownHandler = this.mouseDownHandler.bind(this);
   }
 
   override onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
 
-    this.#player = new Human({
+    this.#player = new Hero({
       pos: ex.vec(100, 100),
     });
     this.add(this.#player);
@@ -30,7 +29,7 @@ export class GameScene extends ex.Scene {
 
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
-    this.input.pointers.on("down", this.mouseDownHandler);
+    this.input.pointers.on("down", this.mouseDownHandler.bind(this));
   }
 
   private mouseDownHandler(event: ex.PointerEvent): void {

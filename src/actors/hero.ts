@@ -3,19 +3,17 @@ import { spriteSheet } from "../resources";
 
 type HumanArgs = Pick<ex.ActorArgs, "pos">;
 
-export class Human extends ex.Actor {
+export class Hero extends ex.Actor {
   constructor({ pos }: HumanArgs) {
     super({
       pos: pos,
-      name: "Human",
+      name: "Hero",
     });
   }
 
   override onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
     const sprite = spriteSheet.getSprite(4, 0);
-    // sprite.width = 16;
-    // sprite.height = 16;
     this.graphics.use(sprite);
   }
 
