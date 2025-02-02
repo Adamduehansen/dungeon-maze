@@ -11,6 +11,7 @@ export class Tile extends ex.Actor {
       name: "Tile",
       width: 8,
       height: 8,
+      color: ex.Color.Gray,
     });
   }
 
