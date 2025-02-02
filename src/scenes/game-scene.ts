@@ -12,25 +12,25 @@ export class GameScene extends ex.Scene {
 
   override onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
-
-    const cell = new Cell({
-      pos: ex.vec(150, 150),
-    });
-    this.add(cell);
-
-    // Camera
-    this.camera.zoom = 2;
   }
 
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
 
+    const cell1 = new Cell({
+      pos: ex.vec(100, 100),
+    });
+    this.add(cell1);
+
+    const cell2 = new Cell({
+      pos: ex.vec(150, 100),
+    });
+    this.add(cell2);
+
     const humanPlayer = new HumanPlayer({
-      heroSpawnPos: ex.vec(100, 100),
+      heroSpawnCell: cell1,
     });
     this.add(humanPlayer.hero);
-
-    this.camera.pos = humanPlayer.hero.pos;
 
     this.#players = [humanPlayer];
   }

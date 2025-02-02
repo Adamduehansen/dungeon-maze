@@ -1,12 +1,18 @@
 import * as ex from "excalibur";
+import { Cell } from "./cell";
 import { spriteSheet } from "../resources";
 
-type HumanArgs = Pick<ex.ActorArgs, "pos">;
+type UnitType = "hero";
 
-export class Hero extends ex.Actor {
-  constructor({ pos }: HumanArgs) {
+interface Args {
+  unitType: UnitType;
+  cell: Cell;
+}
+
+export class Unit extends ex.Actor {
+  constructor(args: Args) {
     super({
-      pos: pos,
+      pos: args.cell.pos,
       name: "Hero",
     });
   }

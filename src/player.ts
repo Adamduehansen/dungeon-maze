@@ -1,16 +1,19 @@
-import * as ex from "excalibur";
-import { Hero } from "./actors/hero";
+import { Unit } from "./actors/unit";
+import { Cell } from "./actors/cell";
 
 interface Args {
-  heroSpawnPos: ex.Vector;
+  heroSpawnCell: Cell;
 }
 
 export abstract class Player {
-  hero: Hero;
+  hero: Unit;
+  enemies: Unit[];
 
   constructor(args: Args) {
-    this.hero = new Hero({
-      pos: args.heroSpawnPos,
+    this.hero = new Unit({
+      cell: args.heroSpawnCell,
+      unitType: "hero",
     });
+    this.enemies = [];
   }
 }
