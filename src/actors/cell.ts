@@ -1,25 +1,32 @@
 import * as ex from "excalibur";
 
+type CellType = "floor" | "wall";
+
+export interface CellConfig {
+  type: "floor" | "wall";
+}
+
 interface Args {
-  x: number;
-  y: number;
+  column: number;
+  row: number;
+  type: CellType;
 }
 
 export class Cell extends ex.Actor {
-  readonly x: number;
-  readonly y: number;
+  readonly column: number;
+  readonly row: number;
 
-  constructor({ x, y }: Args) {
+  constructor({ column, row, type }: Args) {
     super({
-      pos: ex.vec(x * 8, y * 8),
-      name: `Cell [${x}, ${y}]`,
+      pos: ex.vec(column * 8, row * 8),
+      name: `Cell [${column}, ${row}]`,
       width: 8,
       height: 8,
-      color: ex.Color.Gray,
+      color: type === "floor" ? ex.Color.Gray : ex.Color.Black,
       anchor: ex.Vector.Zero,
     });
 
-    this.x = x;
-    this.y = y;
+    this.column = column;
+    this.row = row;
   }
 }

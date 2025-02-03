@@ -2,17 +2,17 @@ import * as ex from "excalibur";
 import { Player } from "./player";
 import { Board } from "./board";
 
-type Args = ConstructorParameters<typeof Player>[0] & {
+interface Args {
   engine: ex.Engine;
   board: Board;
-};
+}
 
 export class MainPlayer extends Player {
   #board: Board;
 
-  constructor({ board, engine, heroSpawnCell }: Args) {
+  constructor({ board, engine }: Args) {
     super({
-      heroSpawnCell: heroSpawnCell,
+      // heroSpawnCell: heroSpawnCell,
     });
     this.#board = board;
 
@@ -21,11 +21,14 @@ export class MainPlayer extends Player {
 
   #onMouseDown(event: ex.PointerEvent): void {
     const cell = this.#board.getCellByPos(event.worldPos);
+    console.log(cell);
 
-    if (cell === null) {
-      return;
-    }
+    // console.log(this.#board.isEdgeCell(cell));
 
-    this.hero.moveTo(cell.pos);
+    // if (cell === null) {
+    //   return;
+    // }
+
+    // this.hero.moveTo(cell.pos);
   }
 }

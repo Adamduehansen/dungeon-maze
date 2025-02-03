@@ -2,8 +2,10 @@ import * as ex from "excalibur";
 import { Player } from "../player";
 import { MainPlayer } from "../main-player";
 import { Board } from "../board";
+import { Tile } from "../tile";
 
 export class GameScene extends ex.Scene {
+  #board!: Board;
   #players: Player[] = [];
 
   constructor() {
@@ -17,23 +19,19 @@ export class GameScene extends ex.Scene {
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
 
-    const board = new Board();
-    for (const tile of board.tiles) {
-      for (const cell of tile.cells) {
-        this.add(cell);
-      }
-    }
+    this.#board = new Board();
+    this.add(this.#board);
 
     const mainPlayer = new MainPlayer({
-      heroSpawnCell: board.tiles[0].cells[0],
+      // heroSpawnCell: ex.Vector.Zero,
       engine: this.engine,
-      board: board,
+      board: this.#board,
     });
-    this.add(mainPlayer.hero);
+    // this.add(mainPlayer.hero);
 
-    this.camera.addStrategy(new ex.LockCameraToActorStrategy(mainPlayer.hero));
-    this.camera.zoom = 3;
+    // this.camera.addStrategy(new ex.LockCameraToActorStrategy(mainPlayer.hero));
+    // this.camera.zoom = 3;
 
-    this.#players.push(mainPlayer);
+    // this.#players.push(mainPlayer);
   }
 }
