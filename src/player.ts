@@ -1,19 +1,30 @@
-import { Unit } from "./actors/unit";
-import { Cell } from "./actors/cell";
-import { Hero } from "./actors/hero";
+import * as ex from "excalibur";
+import { Board } from "./board";
 
 interface Args {
-  // heroSpawnCell: Cell;
+  engine: ex.Engine;
+  board: Board;
 }
 
-export abstract class Player {
-  // hero: Hero;
-  enemies: Unit[];
+export class Player {
+  #board: Board;
 
-  constructor({/* heroSpawnCell */}: Args) {
-    // this.hero = new Hero({
-    //   cell: heroSpawnCell,
-    // });
-    this.enemies = [];
+  constructor({ board, engine }: Args) {
+    this.#board = board;
+
+    engine.input.pointers.on("down", this.#onMouseDown.bind(this));
+  }
+
+  #onMouseDown(event: ex.PointerEvent): void {
+    const cell = this.#board.getCellByPos(event.worldPos);
+    console.log(cell);
+
+    // console.log(this.#board.isEdgeCell(cell));
+
+    // if (cell === null) {
+    //   return;
+    // }
+
+    // this.hero.moveTo(cell.pos);
   }
 }

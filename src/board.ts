@@ -14,7 +14,7 @@ export class Board extends ex.Actor {
   onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
 
-    this.addTile(ex.vec(0, 0), StartTileConfig);
+    this.addStartTile();
 
     // this.addTile(ex.vec(64, 0), {
     //   columns: 4,
@@ -22,7 +22,11 @@ export class Board extends ex.Actor {
     // });
   }
 
-  addTile(pos: ex.Vector, tileConfig: TileConfig) {
+  addStartTile(): void {
+    this.addTile(ex.vec(0, 0), StartTileConfig);
+  }
+
+  addTile(pos: ex.Vector, tileConfig: TileConfig): void {
     const tile2 = new Tile(pos, tileConfig);
     this.addChild(tile2);
     this.tiles.push(tile2);
