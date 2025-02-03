@@ -21,6 +21,9 @@ export class GameScene extends ex.Scene {
       board: this.#board,
     });
 
+    this.camera.pos = ex.Vector.Zero;
+    this.camera.zoom = 3;
+
     // this.add(mainPlayer.hero);
 
     // this.camera.addStrategy(new ex.LockCameraToActorStrategy(mainPlayer.hero));

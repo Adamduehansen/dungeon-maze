@@ -22,7 +22,6 @@ export class Cell extends ex.Actor {
       name: `Cell [${column}, ${row}]`,
       width: 8,
       height: 8,
-      color: type === "floor" ? ex.Color.Gray : ex.Color.Black,
       anchor: ex.Vector.Zero,
     });
 

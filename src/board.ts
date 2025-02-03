@@ -1,12 +1,13 @@
 import * as ex from "excalibur";
-import { Cell } from "./actors/cell";
-import { StartTileConfig, Tile, TileConfig } from "./tile";
+import { Resources } from "./resources";
+import { TiledResource } from "@excaliburjs/plugin-tiled";
 
 export class Board extends ex.Actor {
-  readonly tiles: Tile[] = [];
+  readonly tiledResources: TiledResource[] = [];
 
   constructor() {
     super({
+      name: "Board",
       pos: ex.Vector.Zero,
     });
   }
@@ -14,7 +15,15 @@ export class Board extends ex.Actor {
   onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
 
-    this.addStartTile();
+    const startTile = Resources.startTile;
+    startTile.addToScene(engine.currentScene);
+    this.tiledResources.push(startTile);
+
+    const tile1 = Resources.tile1;
+    tile1.addToScene(engine.currentScene, {
+      pos: ex.vec(64, 0),
+    });
+    this.tiledResources.push(tile1);
 
     // this.addTile(ex.vec(64, 0), {
     //   columns: 4,
@@ -22,28 +31,31 @@ export class Board extends ex.Actor {
     // });
   }
 
-  addStartTile(): void {
-    this.addTile(ex.vec(0, 0), StartTileConfig);
-  }
+  // addTile(pos: ex.Vector, tileConfig: TileConfig): void {
+  //   const tile2 = new Tile(pos, tileConfig);
+  //   this.addChild(tile2);
+  //   this.tiles.push(tile2);
+  // }
 
-  addTile(pos: ex.Vector, tileConfig: TileConfig): void {
-    const tile2 = new Tile(pos, tileConfig);
-    this.addChild(tile2);
-    this.tiles.push(tile2);
-  }
+  // getCell(column: number, row: number): Cell | null {
+  //   return this.tiles
+  //     .map((tile) => tile.cells)
+  //     .flat()
+  //     .find((cell) => cell.column === column && cell.row === row) ?? null;
+  // }
 
-  getCell(column: number, row: number): Cell | null {
-    return this.tiles
-      .map((tile) => tile.cells)
-      .flat()
-      .find((cell) => cell.column === column && cell.row === row) ?? null;
-  }
+  getCellByPos(pos: ex.Vector): ex.Tile | ex.IsometricTile | null {
+    let selectedTile: ex.Tile | ex.IsometricTile | null = null;
+    for (const tiledResource of this.tiledResources) {
+      const tileAtPoint = tiledResource.getTileByPoint("Ground", pos);
+      if (tileAtPoint === null) {
+        continue;
+      }
 
-  getCellByPos(pos: ex.Vector): Cell | null {
-    const column = Math.floor(pos.x / 8);
-    const row = Math.floor(pos.y / 8);
-    console.log(column, row);
+      selectedTile = tileAtPoint.exTile;
+      break;
+    }
 
-    return this.getCell(column, row);
+    return selectedTile;
   }
 }

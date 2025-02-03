@@ -17,7 +17,7 @@ export class Player {
 
   #onMouseDown(event: ex.PointerEvent): void {
     const cell = this.#board.getCellByPos(event.worldPos);
-    console.log(cell);
+    console.log("Move player to", cell?.pos);
 
     // console.log(this.#board.isEdgeCell(cell));
 

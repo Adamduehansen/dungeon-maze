@@ -10,6 +10,7 @@ const engine = new ex.Engine({
   scenes: {
     gameScene: GameScene,
   },
+  backgroundColor: ex.Color.Black,
 });
 
 await engine.start(loader);
