@@ -1,17 +1,16 @@
 import * as ex from "excalibur";
 import { spriteSheet } from "../resources";
-import { Cell } from "./cell";
 import { Unit } from "./unit";
 
 interface Args {
-  cell: Cell;
+  tile: ex.Tile | ex.IsometricTile | null;
 }
 
 export class Hero extends Unit {
-  constructor({ cell }: Args) {
+  constructor(args: Args) {
     super({
       name: "Hero",
-      cell: cell,
+      pos: args.tile!.pos,
     });
   }
 

@@ -1,6 +1,6 @@
 import * as ex from "excalibur";
 import { Player } from "../player";
-import { Board } from "../board";
+import { Board } from "../actors/board";
 
 export class GameScene extends ex.Scene {
   #player!: Player;

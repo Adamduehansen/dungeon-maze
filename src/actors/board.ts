@@ -1,5 +1,5 @@
 import * as ex from "excalibur";
-import { Resources } from "./resources";
+import { Resources } from "../resources";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
 export class Board extends ex.Actor {
@@ -24,11 +24,6 @@ export class Board extends ex.Actor {
       pos: ex.vec(64, 0),
     });
     this.tiledResources.push(tile1);
-
-    // this.addTile(ex.vec(64, 0), {
-    //   columns: 4,
-    //   rows: 4,
-    // });
   }
 
   // addTile(pos: ex.Vector, tileConfig: TileConfig): void {

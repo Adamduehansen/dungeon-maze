@@ -1,16 +1,13 @@
 import * as ex from "excalibur";
-import { Cell } from "./cell";
 
-interface Args {
-  name: string;
-  cell: Cell;
-}
+type Args = Pick<ex.ActorArgs, "name" | "pos">;
 
 export abstract class Unit extends ex.Actor {
   constructor(args: Args) {
     super({
-      pos: args.cell.pos,
+      pos: args.pos,
       anchor: ex.Vector.Zero,
+      z: 100,
     });
   }
 
