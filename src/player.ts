@@ -8,21 +8,28 @@ interface Args {
 }
 
 export class Player {
-  #hero?: Hero;
+  hero?: Hero;
   #board: Board;
+  #engine: ex.Engine;
 
   constructor({ board, engine }: Args) {
     this.#board = board;
+    this.#engine = engine;
+
     engine.input.pointers.on("down", this.#onMouseDown.bind(this));
+    this.#board.on("initialize", this.#initializeHero.bind(this));
+  }
 
-    this.#board.on("initialize", () => {
-      const startTile = this.#board.getCellByPos(ex.vec(0, 0));
+  #initializeHero(): void {
+    const startTile = this.#board.getCellByPos(ex.vec(0, 0));
 
-      this.#hero = new Hero({
-        tile: startTile,
-      });
-      this.#board.addChild(this.#hero);
+    this.hero = new Hero({
+      tile: startTile,
     });
+    this.#board.addChild(this.hero);
+    const { camera } = this.#engine.currentScene;
+    camera.addStrategy(new ex.LockCameraToActorStrategy(this.hero));
+    camera.zoom = 3;
   }
 
   #onMouseDown(event: ex.PointerEvent): void {
@@ -32,14 +39,6 @@ export class Player {
     }
 
     console.log("Move player to", cell.pos);
-    this.#hero?.moveTo(cell.pos);
-
-    // console.log(this.#board.isEdgeCell(cell));
-
-    // if (cell === null) {
-    //   return;
-    // }
-
-    // this.hero.moveTo(cell.pos);
+    this.hero?.moveTo(cell.pos);
   }
 }

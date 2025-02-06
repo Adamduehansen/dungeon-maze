@@ -32,13 +32,6 @@ export class Board extends ex.Actor {
   //   this.tiles.push(tile2);
   // }
 
-  // getCell(column: number, row: number): Cell | null {
-  //   return this.tiles
-  //     .map((tile) => tile.cells)
-  //     .flat()
-  //     .find((cell) => cell.column === column && cell.row === row) ?? null;
-  // }
-
   getCellByPos(pos: ex.Vector): ex.Tile | ex.IsometricTile | null {
     let selectedTile: ex.Tile | ex.IsometricTile | null = null;
     for (const tiledResource of this.tiledResources) {
