@@ -40,6 +40,32 @@ export class Player {
 
     console.log("Move player to", cell.pos);
     await this.#hero.moveTo(cell.pos);
-    console.log(this.#hero.pos);
+    if (this.#isHeroAtEdgeOfBoard()) {
+      console.log("Put a new tile!");
+    }
+  }
+
+  #isHeroAtEdgeOfBoard(): boolean {
+    if (this.#hero === undefined) {
+      return false;
+    }
+
+    const heroPos = this.#hero.pos;
+
+    const nextCellLeftPos = ex.vec(heroPos.x - 4, heroPos.y);
+    const leftCell = this.#board.getCellByPos(nextCellLeftPos);
+
+    if (leftCell === null) {
+      return true;
+    }
+
+    const nextCellRightPos = ex.vec(heroPos.x + 8, heroPos.y);
+    const rightCell = this.#board.getCellByPos(nextCellRightPos);
+
+    if (rightCell === null) {
+      return true;
+    }
+
+    return false;
   }
 }
