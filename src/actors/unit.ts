@@ -11,10 +11,12 @@ export abstract class Unit extends ex.Actor {
     });
   }
 
-  moveTo(pos: ex.Vector): void {
-    this.actions.moveTo({
-      duration: 200,
-      pos: pos,
+  moveTo(pos: ex.Vector): Promise<void> {
+    return new Promise((resolve) => {
+      this.actions.moveTo({
+        duration: 200,
+        pos: pos,
+      }).callMethod(resolve);
     });
   }
 }

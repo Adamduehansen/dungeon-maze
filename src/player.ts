@@ -8,7 +8,7 @@ interface Args {
 }
 
 export class Player {
-  hero?: Hero;
+  #hero?: Hero;
   #board: Board;
   #engine: ex.Engine;
 
@@ -23,22 +23,23 @@ export class Player {
   #initializeHero(): void {
     const startTile = this.#board.getCellByPos(ex.vec(24, 16));
 
-    this.hero = new Hero({
+    this.#hero = new Hero({
       tile: startTile,
     });
-    this.#board.addChild(this.hero);
+    this.#board.addChild(this.#hero);
     const { camera } = this.#engine.currentScene;
-    camera.addStrategy(new ex.LockCameraToActorStrategy(this.hero));
+    camera.addStrategy(new ex.LockCameraToActorStrategy(this.#hero));
     camera.zoom = 3;
   }
 
-  #onMouseDown(event: ex.PointerEvent): void {
+  async #onMouseDown(event: ex.PointerEvent): Promise<void> {
     const cell = this.#board.getCellByPos(event.worldPos);
-    if (cell === null) {
+    if (cell === null || this.#hero === undefined) {
       return;
     }
 
     console.log("Move player to", cell.pos);
-    this.hero?.moveTo(cell.pos);
+    await this.#hero.moveTo(cell.pos);
+    console.log(this.#hero.pos);
   }
 }
