@@ -21,7 +21,7 @@ export class Player {
   }
 
   #initializeHero(): void {
-    const startTile = this.#board.getCellByPos(ex.vec(0, 0));
+    const startTile = this.#board.getCellByPos(ex.vec(24, 16));
 
     this.hero = new Hero({
       tile: startTile,
