@@ -1,10 +1,8 @@
 import * as ex from "excalibur";
-import { Player } from "../player";
 import { Board } from "../actors/board";
 import { Resources } from "../resources";
 
 export class GameScene extends ex.Scene {
-  #player!: Player;
   #board!: Board;
 
   override onInitialize(engine: ex.Engine): void {
@@ -15,15 +13,19 @@ export class GameScene extends ex.Scene {
     super.onActivate(context);
 
     this.#board = new Board(this);
-    this.#board.addStartTile();
     this.#board.addTile({
       tile: Resources.tile1,
       pos: ex.vec(64, 0),
     });
 
-    this.#player = new Player({
-      engine: this.engine,
-      board: this.#board,
-    });
+    // this.#hero = new Hero();
+
+    // this.camera.pos = ex.Vector.Zero;
+    // this.camera.zoom = 3;
+
+    // this.#player = new Player({
+    //   engine: this.engine,
+    //   board: this.#board,
+    // });
   }
 }

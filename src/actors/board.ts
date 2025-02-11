@@ -8,6 +8,7 @@ export class Board {
 
   constructor(scene: ex.Scene) {
     this.#scene = scene;
+    this.addStartTile();
   }
 
   addStartTile(): void {
