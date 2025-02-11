@@ -2,35 +2,30 @@ import * as ex from "excalibur";
 import { Resources } from "../resources";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
-export class Board extends ex.Actor {
+export class Board {
+  readonly #scene: ex.Scene;
   readonly tiledResources: TiledResource[] = [];
 
-  constructor() {
-    super({
-      name: "Board",
+  constructor(scene: ex.Scene) {
+    this.#scene = scene;
+  }
+
+  addStartTile(): void {
+    this.addTile({
+      tile: Resources.startTile,
       pos: ex.Vector.Zero,
     });
   }
 
-  onInitialize(engine: ex.Engine): void {
-    super.onInitialize(engine);
-
-    const startTile = Resources.startTile;
-    startTile.addToScene(engine.currentScene);
-    this.tiledResources.push(startTile);
-
-    const tile1 = Resources.tile1;
-    tile1.addToScene(engine.currentScene, {
-      pos: ex.vec(64, 0),
+  addTile(options: {
+    pos: ex.Vector;
+    tile: TiledResource;
+  }): void {
+    options.tile.addToScene(this.#scene, {
+      pos: options.pos,
     });
-    this.tiledResources.push(tile1);
+    this.tiledResources.push(options.tile);
   }
-
-  // addTile(pos: ex.Vector, tileConfig: TileConfig): void {
-  //   const tile2 = new Tile(pos, tileConfig);
-  //   this.addChild(tile2);
-  //   this.tiles.push(tile2);
-  // }
 
   getCellByPos(pos: ex.Vector): ex.Tile | ex.IsometricTile | null {
     let selectedTile: ex.Tile | ex.IsometricTile | null = null;

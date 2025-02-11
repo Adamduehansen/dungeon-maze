@@ -17,7 +17,7 @@ export class Player {
     this.#engine = engine;
 
     engine.input.pointers.on("down", this.#onMouseDown.bind(this));
-    this.#board.on("initialize", this.#initializeHero.bind(this));
+    engine.currentScene.on("activate", this.#initializeHero.bind(this));
   }
 
   #initializeHero(): void {
@@ -26,7 +26,7 @@ export class Player {
     this.#hero = new Hero({
       tile: startTile,
     });
-    this.#board.addChild(this.#hero);
+    this.#engine.currentScene.add(this.#hero);
     const { camera } = this.#engine.currentScene;
     camera.addStrategy(new ex.LockCameraToActorStrategy(this.#hero));
     camera.zoom = 3;

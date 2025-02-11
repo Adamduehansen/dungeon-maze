@@ -1,6 +1,7 @@
 import * as ex from "excalibur";
 import { Player } from "../player";
 import { Board } from "../actors/board";
+import { Resources } from "../resources";
 
 export class GameScene extends ex.Scene {
   #player!: Player;
@@ -13,8 +14,12 @@ export class GameScene extends ex.Scene {
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
 
-    this.#board = new Board();
-    this.add(this.#board);
+    this.#board = new Board(this);
+    this.#board.addStartTile();
+    this.#board.addTile({
+      tile: Resources.tile1,
+      pos: ex.vec(64, 0),
+    });
 
     this.#player = new Player({
       engine: this.engine,
