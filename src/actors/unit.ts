@@ -8,7 +8,13 @@ export abstract class Unit extends ex.Actor {
       pos: args.pos,
       anchor: ex.Vector.Zero,
       z: 100,
+      width: 8,
+      height: 8,
     });
+  }
+
+  onInitialize(_engine: ex.Engine): void {
+    this.events.on("pointerdown", this.onSelected.bind(this));
   }
 
   moveTo(pos: ex.Vector): Promise<void> {
@@ -19,4 +25,6 @@ export abstract class Unit extends ex.Actor {
       }).callMethod(resolve);
     });
   }
+
+  abstract onSelected(): void;
 }

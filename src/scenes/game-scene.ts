@@ -3,6 +3,8 @@ import { Board } from "../board";
 import { Resources } from "../resources";
 import { Hero } from "../actors/hero";
 
+const HeroStartVector = ex.vec(24, 16);
+
 export class GameScene extends ex.Scene {
   #hero!: Hero;
   #board!: Board;
@@ -21,16 +23,11 @@ export class GameScene extends ex.Scene {
     });
 
     this.#hero = new Hero({
-      tile: this.#board.getCellByPos(ex.vec(24, 16)),
+      tile: this.#board.getCellByPos(HeroStartVector),
     });
     this.add(this.#hero);
 
     this.camera.pos = ex.Vector.Zero;
     this.camera.zoom = 3;
-
-    // this.#player = new Player({
-    //   engine: this.engine,
-    //   board: this.#board,
-    // });
   }
 }
