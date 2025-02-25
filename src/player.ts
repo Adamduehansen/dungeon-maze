@@ -1,5 +1,5 @@
 import * as ex from "excalibur";
-import { Board } from "./actors/board";
+import { Board } from "./board";
 import { Hero } from "./actors/hero";
 
 interface Args {
