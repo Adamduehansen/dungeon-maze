@@ -7,7 +7,6 @@ const HeroStartVector = ex.vec(24, 16);
 
 export class GameScene extends ex.Scene {
   #hero!: Hero;
-  #board!: Board;
 
   override onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
@@ -16,14 +15,16 @@ export class GameScene extends ex.Scene {
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
 
-    this.#board = new Board(this);
-    this.#board.addTile({
+    Board.instance.addStartTile(this);
+
+    Board.instance.addTile({
       tile: Resources.tile1,
       pos: ex.vec(64, 0),
+      scene: this,
     });
 
     this.#hero = new Hero({
-      tile: this.#board.getCellByPos(HeroStartVector),
+      tile: Board.instance.getCellByPos(HeroStartVector),
     });
     this.add(this.#hero);
 

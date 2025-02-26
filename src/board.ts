@@ -2,27 +2,35 @@ import * as ex from "excalibur";
 import { Resources } from "./resources";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
+let instance: Board | null = null;
+
 export class Board {
-  readonly #scene: ex.Scene;
   readonly tiledResources: TiledResource[] = [];
 
-  constructor(scene: ex.Scene) {
-    this.#scene = scene;
-    this.addStartTile();
+  private constructor() {}
+
+  static get instance(): Board {
+    if (instance === null) {
+      instance = new Board();
+    }
+
+    return instance;
   }
 
-  addStartTile(): void {
+  addStartTile(scene: ex.Scene): void {
     this.addTile({
       tile: Resources.startTile,
       pos: ex.Vector.Zero,
+      scene: scene,
     });
   }
 
   addTile(options: {
     pos: ex.Vector;
     tile: TiledResource;
+    scene: ex.Scene;
   }): void {
-    options.tile.addToScene(this.#scene, {
+    options.tile.addToScene(options.scene, {
       pos: options.pos,
     });
     this.tiledResources.push(options.tile);

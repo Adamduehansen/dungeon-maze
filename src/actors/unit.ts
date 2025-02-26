@@ -13,10 +13,6 @@ export abstract class Unit extends ex.Actor {
     });
   }
 
-  onInitialize(_engine: ex.Engine): void {
-    this.events.on("pointerdown", this.onSelected.bind(this));
-  }
-
   moveTo(pos: ex.Vector): Promise<void> {
     return new Promise((resolve) => {
       this.actions.moveTo({
@@ -25,6 +21,4 @@ export abstract class Unit extends ex.Actor {
       }).callMethod(resolve);
     });
   }
-
-  abstract onSelected(): void;
 }

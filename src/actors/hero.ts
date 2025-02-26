@@ -19,9 +19,4 @@ export class Hero extends Unit {
     const sprite = spriteSheet.getSprite(4, 0);
     this.graphics.use(sprite);
   }
-
-  onSelected(): void {
-    ex.Logger.getInstance().info("Hero selected");
-    this.graphics.current!.tint = ex.Color.Green;
-  }
 }
