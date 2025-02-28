@@ -1,12 +1,10 @@
 import * as ex from "excalibur";
-import { Board } from "../board";
-import { Resources } from "../resources";
-import { Hero } from "../actors/hero";
+// import { Hero } from "../actors/hero";
 
-const HeroStartVector = ex.vec(24, 16);
+// const HeroStartVector = ex.vec(24, 16);
 
 export class GameScene extends ex.Scene {
-  #hero!: Hero;
+  // #hero!: Hero;
 
   override onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
@@ -15,20 +13,25 @@ export class GameScene extends ex.Scene {
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
 
-    Board.instance.addStartTile(this);
+    // this.#board.addStartTile();
 
-    Board.instance.addTile({
-      tile: Resources.tile1,
-      pos: ex.vec(64, 0),
-      scene: this,
-    });
+    // this.#board.addTile({
+    //   tile: Resources.tile1,
+    //   pos: ex.vec(64, 0),
+    // });
 
-    this.#hero = new Hero({
-      tile: Board.instance.getCellByPos(HeroStartVector),
-    });
-    this.add(this.#hero);
+    // Board.instance.addTile({
+    //   tile: Resources.tile1,
+    //   pos: ex.vec(96, 0),
+    //   scene: this,
+    // });
 
-    this.camera.pos = ex.Vector.Zero;
-    this.camera.zoom = 3;
+    // this.#hero = new Hero({
+    //   tile: Board.instance.getCellByPos(HeroStartVector),
+    // });
+    // this.add(this.#hero);
+
+    // this.camera.pos = ex.Vector.Zero;
+    // this.camera.zoom = 3;
   }
 }

@@ -7,6 +7,8 @@ interface Args {
 }
 
 export class Hero extends Unit {
+  speed = 2;
+
   constructor(args: Args) {
     super({
       name: "Hero",
