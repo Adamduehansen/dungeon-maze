@@ -4,6 +4,7 @@
     "npm:@excaliburjs/plugin-tiled@~0.30.2": "0.30.2_excalibur@0.30.3",
     "npm:excalibur@~0.30.3": "0.30.3",
     "npm:typescript@~5.6.2": "5.6.3",
+    "npm:valibot@^1.0.0-rc.2": "1.0.0-rc.2_typescript@5.6.3",
     "npm:vite@^6.0.5": "6.0.7"
   },
   "npm": {
@@ -489,6 +490,12 @@
         "requires-port"
       ]
     },
+    "valibot@1.0.0-rc.2_typescript@5.6.3": {
+      "integrity": "sha512-Tnnp7dydpihvoUbJiaxuYfsCAgAFKuFMex7PTaI25XSjRWkU70DmJPlAO1W6sF1/WUx4RNWyM2hdmBSMIUSZFA==",
+      "dependencies": [
+        "typescript"
+      ]
+    },
     "vite@6.0.7": {
       "integrity": "sha512-RDt8r/7qx9940f8FcOIAH9PTViRrghKaK2K1jY3RaAURrEUbm9Du1mJ72G+jlhtG3WwodnfzY8ORQZbBavZEAQ==",
       "dependencies": [
@@ -545,6 +552,7 @@
         "npm:@excaliburjs/plugin-tiled@~0.30.2",
         "npm:excalibur@~0.30.3",
         "npm:typescript@~5.6.2",
+        "npm:valibot@^1.0.0-rc.2",
         "npm:vite@^6.0.5"
       ]
     }
