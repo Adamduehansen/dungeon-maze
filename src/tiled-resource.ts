@@ -2,12 +2,18 @@ import * as v from "valibot";
 
 const TiledLayerSchema = v.object({
   data: v.array(v.number()),
+  type: v.literal("tilelayer"),
+});
+
+const ObjectGroupSchema = v.object({
+  type: v.literal("objectgroup"),
+  objects: v.array(v.object({})),
 });
 
 const TiledDataSchema = v.object({
   height: v.number(),
   width: v.number(),
-  layers: v.array(TiledLayerSchema),
+  layers: v.array(v.union([TiledLayerSchema, ObjectGroupSchema])),
 });
 
 type TiledData = v.InferOutput<typeof TiledDataSchema>;

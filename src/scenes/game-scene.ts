@@ -1,13 +1,8 @@
 import * as ex from "excalibur";
 import { Resources } from "../resources";
-import { Tile } from "../actors/tile";
-// import { Hero } from "../actors/hero";
-
-// const HeroStartVector = ex.vec(24, 16);
+import { ObjectGroup, Tile, TileLayer } from "../actors/tile";
 
 export class GameScene extends ex.Scene {
-  // #hero!: Hero;
-
   override onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
   }
@@ -16,7 +11,7 @@ export class GameScene extends ex.Scene {
     super.onActivate(context);
 
     const { data } = Resources.startTile;
-    const tile = new Tile({
+    const tile = new Tile(ex.Vector.Zero, {
       columns: data.width,
       rows: data.height,
       layers: data.layers,

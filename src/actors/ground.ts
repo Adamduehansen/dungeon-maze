@@ -1,11 +1,10 @@
 import * as ex from "excalibur";
 import { spriteSheet } from "../resources";
 
-export class Cell extends ex.Actor {
-  constructor(pos: ex.Vector) {
+export class Ground extends ex.Actor {
+  constructor() {
     super({
-      name: "cell",
-      pos: pos,
+      name: "Ground",
     });
 
     this.on("pointerenter", () => {
