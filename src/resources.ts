@@ -1,9 +1,9 @@
 import * as ex from "excalibur";
-import { TiledResource } from "./tiled-resource";
+import { TiledSource } from "./tiled-source";
 
 export const Resources = {
   spriteSheet: new ex.ImageSource("./assets/spritesheet.png"),
-  startTile: new TiledResource("./tiles/start-tile.tmj"),
+  startTile: new TiledSource("./tiles/start-tile.tmj"),
   // tile1: new TiledResource("./tiles/tile-1.tmx"),
 } as const;
 

@@ -1,10 +1,15 @@
 import * as ex from "excalibur";
 import { spriteSheet } from "../resources";
 
+interface Args {
+  pos: ex.Vector;
+}
+
 export class Ground extends ex.Actor {
-  constructor() {
+  constructor(args: Args) {
     super({
       name: "Ground",
+      pos: args.pos,
     });
 
     this.on("pointerenter", () => {
@@ -18,7 +23,7 @@ export class Ground extends ex.Actor {
 
   onInitialize(engine: ex.Engine): void {
     super.onInitialize(engine);
-    const sprite = spriteSheet.getSprite(1, 1).clone();
+    const sprite = spriteSheet.getSprite(1, 1);
     this.graphics.use(sprite);
   }
 }
