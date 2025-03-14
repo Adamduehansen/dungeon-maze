@@ -13,7 +13,7 @@ export class GameScene extends ex.Scene {
     const tile = new Tile(ex.Vector.Zero, Resources.startTile);
     this.add(tile);
 
-    // this.camera.pos = ex.Vector.Zero;
-    // this.camera.zoom = 3;
+    this.camera.pos = ex.Vector.Zero;
+    this.camera.zoom = 3;
   }
 }

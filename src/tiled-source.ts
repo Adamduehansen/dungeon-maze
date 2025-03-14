@@ -14,6 +14,8 @@ const ObjectGroupSchema = v.object({
 
 const TiledDataSchema = v.object({
   layers: v.array(ObjectGroupSchema),
+  width: v.number(),
+  height: v.number(),
 });
 
 export interface TiledObject {
@@ -24,11 +26,15 @@ export interface TiledObject {
 
 interface TiledData {
   objects: TiledObject[];
+  width: number;
+  height: number;
 }
 
 export class TiledSource implements ex.Loadable<TiledData> {
   data: TiledData = {
     objects: [],
+    height: 0,
+    width: 0,
   };
   #path: string;
 
@@ -51,6 +57,8 @@ export class TiledSource implements ex.Loadable<TiledData> {
           type: object.gid,
         };
       }),
+      width: tiledData.width * 8,
+      height: tiledData.height * 8,
     };
     this.#isLoaded = true;
     return this.data;

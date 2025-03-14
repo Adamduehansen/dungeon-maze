@@ -9,7 +9,11 @@ const WallType = 2;
 export class Tile extends ex.Actor {
   constructor(pos: ex.Vector, tiledSource: TiledSource) {
     super({
+      name: "Tile",
       pos: pos,
+      width: tiledSource.data.width,
+      height: tiledSource.data.height,
+      anchor: ex.vec(0, 0),
     });
 
     for (const object of tiledSource.data.objects) {

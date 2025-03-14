@@ -9,6 +9,7 @@ export class Wall extends ex.Actor {
   constructor(args: Args) {
     super({
       pos: args.pos,
+      anchor: ex.vec(0, 0),
     });
   }
 

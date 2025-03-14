@@ -10,6 +10,7 @@ export class Ground extends ex.Actor {
     super({
       name: "Ground",
       pos: args.pos,
+      anchor: ex.vec(0, 0),
     });
 
     this.on("pointerenter", () => {
