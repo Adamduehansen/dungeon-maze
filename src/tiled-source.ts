@@ -16,7 +16,7 @@ const TiledDataSchema = v.object({
   layers: v.array(ObjectGroupSchema),
 });
 
-interface TiledObject {
+export interface TiledObject {
   x: number;
   y: number;
   type: number;
