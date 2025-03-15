@@ -16,13 +16,17 @@ export class Tile extends ex.Actor {
       anchor: ex.vec(0, 0),
     });
 
-    for (const object of tiledSource.data.objects) {
-      const cell = this.getCell(object);
+    this.#parseObjects(tiledSource.data.objects);
+  }
+
+  #parseObjects(tiledObjects: TiledObject[]) {
+    for (const object of tiledObjects) {
+      const cell = this.#getCell(object);
       this.addChild(cell);
     }
   }
 
-  getCell(object: TiledObject): ex.Actor {
+  #getCell(object: TiledObject): ex.Actor {
     switch (object.type) {
       case GroundType:
         return new Ground({

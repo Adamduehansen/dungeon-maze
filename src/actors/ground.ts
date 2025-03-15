@@ -11,6 +11,8 @@ export class Ground extends ex.Actor {
       name: "Ground",
       pos: args.pos,
       anchor: ex.vec(0, 0),
+      width: 8,
+      height: 8,
     });
 
     this.on("pointerenter", () => {
