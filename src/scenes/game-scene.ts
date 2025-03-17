@@ -2,6 +2,7 @@ import * as ex from "excalibur";
 import { Resources } from "../resources";
 import { Tile } from "../actors/tile";
 import { Hero } from "../actors/hero";
+import { Ground } from "../actors/ground";
 
 export class GameScene extends ex.Scene {
   override onInitialize(engine: ex.Engine): void {
@@ -23,8 +24,13 @@ export class GameScene extends ex.Scene {
     this.camera.pos = ex.Vector.Zero;
     this.camera.zoom = 3;
 
-    this.on("ground-clicked", (ground) => {
-      hero.moveTo(ground.globalPos);
+    this.on("ground-clicked", async (ground) => {
+      if (Ground.isGround(ground) === false) {
+        return;
+      }
+
+      await hero.moveTo(ground.globalPos);
+      console.log("Hero moved!");
     });
   }
 }

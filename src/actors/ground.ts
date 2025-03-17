@@ -34,4 +34,23 @@ export class Ground extends ex.Actor {
     const sprite = spriteSheet.getSprite(1, 1);
     this.graphics.use(sprite);
   }
+
+  /**
+   * Determines if the object is of type {@linkcode Ground}
+   */
+  static isGround(obj: unknown): obj is Ground {
+    if (typeof obj !== "object") {
+      return false;
+    }
+
+    if (obj === undefined || obj === null) {
+      return false;
+    }
+
+    if (("name" in obj) === false) {
+      return false;
+    }
+
+    return obj.name === "Ground";
+  }
 }
