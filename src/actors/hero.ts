@@ -2,17 +2,13 @@ import * as ex from "excalibur";
 import { spriteSheet } from "../resources";
 import { Unit } from "./unit";
 
-interface Args {
-  tile: ex.Tile | ex.IsometricTile | null;
-}
-
 export class Hero extends Unit {
   speed = 2;
 
-  constructor(args: Args) {
+  constructor() {
     super({
       name: "Hero",
-      pos: args.tile!.pos,
+      pos: ex.vec(0, 0),
     });
   }
 

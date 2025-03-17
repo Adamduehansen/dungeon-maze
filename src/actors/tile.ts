@@ -23,12 +23,12 @@ export class Tile extends ex.Actor {
 
   #parseObjects(tiledObjects: TiledObject[]) {
     for (const object of tiledObjects) {
-      const cell = this.#getCell(object);
+      const cell = this.#parseCell(object);
       this.addChild(cell);
     }
   }
 
-  #getCell(object: TiledObject): ex.Actor {
+  #parseCell(object: TiledObject): ex.Actor {
     switch (object.type) {
       case GroundType:
         return new Ground({
