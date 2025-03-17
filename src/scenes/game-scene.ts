@@ -10,7 +10,10 @@ export class GameScene extends ex.Scene {
   override onActivate(context: ex.SceneActivationContext<unknown>): void {
     super.onActivate(context);
 
-    const tile = new Tile(ex.Vector.Zero, Resources.startTile);
+    const startTile = new Tile(ex.Vector.Zero, Resources.startTile);
+    this.add(startTile);
+
+    const tile = new Tile(ex.vec(64, 0), Resources.tile1);
     this.add(tile);
 
     this.camera.pos = ex.Vector.Zero;

@@ -5,6 +5,8 @@ import { Wall } from "./wall";
 
 const GroundType = 18;
 const WallType = 2;
+const CornerRightType = 1;
+const CornerLeftType = 4;
 
 export class Tile extends ex.Actor {
   constructor(pos: ex.Vector, tiledSource: TiledSource) {
@@ -33,6 +35,8 @@ export class Tile extends ex.Actor {
           pos: ex.vec(object.x, object.y),
         });
       case WallType:
+      case CornerRightType:
+      case CornerLeftType:
         return new Wall({
           pos: ex.vec(object.x, object.y),
         });
