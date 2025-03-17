@@ -16,11 +16,16 @@ export class Ground extends ex.Actor {
     });
 
     this.on("pointerenter", () => {
-      ex.Logger.getInstance().info("Entering cell", this);
+      // ex.Logger.getInstance().info("Entering cell", this);
     });
 
     this.on("pointerleave", () => {
-      ex.Logger.getInstance().info("Leaving cell", this);
+      // ex.Logger.getInstance().info("Leaving cell", this);
+    });
+
+    this.on("pointerdown", () => {
+      ex.Logger.getInstance().info("Clicked cell", this);
+      this.scene?.emit("ground-clicked", this);
     });
   }
 

@@ -22,5 +22,9 @@ export class GameScene extends ex.Scene {
 
     this.camera.pos = ex.Vector.Zero;
     this.camera.zoom = 3;
+
+    this.on("ground-clicked", (ground) => {
+      hero.moveTo(ground.globalPos);
+    });
   }
 }
